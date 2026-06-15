@@ -343,16 +343,21 @@ function minutesUntilSession(data: string, horaInicio: string): number {
 let _uid = 300;
 const nid = () => `g${++_uid}`;
 
-const SEED_USERS: User[] = [
-  {
-    id: "u1",
-    name: "Admin",
-    email: "admin@ufersa.edu.br",
-    password: "Admin@123",
-    role: "admin",
-    status: "ativo",
-  },
-];
+const SEED_USERS: User[] = [];
+
+const SEED_TURMAS: Turma[] = [];
+
+const SEED_MONS: Monitoria[] = [];
+
+const SEED_HORS: Horario[] = [];
+
+const SEED_AGEND: Agendamento[] = [];
+
+const SEED_CHAMS: Chamada[] = [];
+
+const SEED_MATERIAIS: Material[] = [];
+
+const SEED_RELATORIOS: Relatorio[] = [];
 
 const BLOCOS = ["Bloco de Aulas I", "Bloco de Aulas II", "LTI"];
 
