@@ -94,67 +94,11 @@ Após a consulta ou persistência das informações (como o registro de uma nova
 
 Responsável por toda a interface gráfica, garantindo que as funcionalidades de visualização de horários e autenticação sejam acessíveis ao usuário final.
 
-### Components
-
-Componentes reutilizáveis da interface.
-
-### Pages
-
-Representam as telas do sistema.
-
-### Layouts
-
-Estruturas visuais compartilhadas entre páginas.
-
-### Routes
-
-Gerenciam a navegação da aplicação.
-
-### Services
-
-Realizam as chamadas para a API do backend.
-
-### Assets
-
-Armazenam imagens, ícones e outros arquivos estáticos.
-
-### Styles
-
-Contêm os arquivos de estilização da aplicação.
-
 ---
 
 ## Backend
 
 Gerencia as regras de negócio e a persistência de dados. É o núcleo que controla o gerenciamento de monitores e a integridade das informações do sistema.
-
-### Controllers
-
-Recebem as requisições e encaminham para os serviços apropriados.
-
-### Services
-
-Implementam a lógica de negócio da aplicação.
-
-### Models
-
-Representam as entidades do sistema.
-
-### Repositories
-
-Realizam o acesso ao banco de dados.
-
-### Routes
-
-Definem os endpoints disponíveis na API.
-
-### Config
-
-Armazena configurações gerais do sistema.
-
-### Database
-
-Gerencia a conexão e a configuração do banco de dados.
 
 ---
 
@@ -178,6 +122,3 @@ Essa abordagem favorece o desenvolvimento colaborativo e segue boas práticas de
 # 8. Considerações Finais
 
 A arquitetura do UfersaMentor atende aos objetivos da disciplina de Engenharia de Software, estabelecendo uma base sólida para um sistema que centraliza informações acadêmicas. O foco na modularidade permite que a aplicação saia do estágio de MVP para uma solução completa de controle de monitorias para a UFERSA.
-
-
-A arquitetura proposta atende aos requisitos do MVP do projeto e estabelece uma base sólida para futuras evoluções do sistema, garantindo organização, modularidade e facilidade de manuten
