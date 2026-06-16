@@ -138,9 +138,9 @@ Após a inicialização, acesse a URL exibida pelo Vite no navegador.
 ---
 
 ## 7. Link do Protótipo
+Acesse abaixo o protótipo navegável:
 
-> **Protótipo navegável:**
-> 
+[Protótipo - UfersaMentor](https://knee-ivory-90805343.figma.site)
 
 ---
 
