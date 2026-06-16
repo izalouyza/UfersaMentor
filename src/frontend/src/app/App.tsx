@@ -1659,17 +1659,13 @@ function RegisterPage({
               </div>
             </FormField>
             <div>
-              <label className="flex items-start gap-3 cursor-pointer select-none group">
-                <div
-                  className={`mt-0.5 w-4 h-4 flex-shrink-0 rounded border-2 flex items-center justify-center transition ${termos ? "border-[#3B69B0] bg-[#3B69B0]" : termosErr ? "border-rose-400" : "border-slate-300 group-hover:border-[#3B69B0]"}`}
-                  onClick={() => {
-                    setTermos((t) => !t);
-                    setTermosErr(false);
-                  }}
-                >
-                  {termos && <CheckCircle2 className="w-3 h-3 text-white" />}
-                </div>
-                <input
+             <label className="flex items-start gap-3 cursor-pointer select-none group">
+    <div
+      className={`mt-0.5 w-4 h-4 flex-shrink-0 rounded border-2 flex items-center justify-center transition ${termos ? "border-[#3B69B0] bg-[#3B69B0]" : termosErr ? "border-rose-400" : "border-slate-300 group-hover:border-[#3B69B0]"}`}
+    >
+      {termos && <CheckCircle2 className="w-3 h-3 text-white" />}
+    </div>
+    <input
                   type="checkbox"
                   checked={termos}
                   onChange={(e) => {

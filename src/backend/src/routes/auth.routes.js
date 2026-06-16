@@ -9,13 +9,20 @@ const router = express.Router();
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  console.log("--- TENTATIVA DE LOGIN ---");
+  console.log("E-mail recebido do front:", email);
+
   if (!email || !password)
     return res.status(400).json({ error: 'E-mail e senha são obrigatórios' });
 
   try {
-    const result = await pool.query(
-      'SELECT * FROM users WHERE email = $1', [email]
-    );
+    // Busca na tabela users
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    
+    // O console.log deve ficar AQUI, depois que a busca termina!
+    console.log("Utilizador encontrado no banco de dados:", result.rows[0]);
+
     const user = result.rows[0];
     if (!user)
       return res.status(401).json({ error: 'E-mail ou senha incorretos' });
@@ -29,7 +36,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || 'secreta123', // Adicionado um fallback caso falte no .env
       { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
 
@@ -58,16 +65,19 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ error: 'Senha deve ter ao menos 8 caracteres' });
 
   try {
+    // CORRIGIDO: Procurar duplicados na tabela 'users'
     const existing = await pool.query(
-      'SELECT id FROM usuarios WHERE email = $1 OR matricula = $2',
+      'SELECT id FROM users WHERE email = $1 OR matricula = $2',
       [email, matricula]
     );
     if (existing.rowCount > 0)
       return res.status(409).json({ error: 'E-mail ou matrícula já cadastrados' });
 
     const hash = await bcrypt.hash(password, 10);
+    
+    // CORRIGIDO: Inserir na tabela 'users'
     const result = await pool.query(
-      `INSERT INTO usuarios (name, email, password, role, matricula, status)
+      `INSERT INTO users (name, email, password, role, matricula, status)
        VALUES ($1, $2, $3, 'student', $4, 'ativo')
        RETURNING id, name, email, role, matricula, status, created_at`,
       [name, email, hash, matricula]
@@ -82,8 +92,9 @@ router.post('/register', async (req, res) => {
 // GET /api/auth/me  (dados do usuário logado)
 router.get('/me', authMiddleware, async (req, res) => {
   try {
+    // CORRIGIDO: Buscar da tabela 'users'
     const result = await pool.query(
-      'SELECT id, name, email, role, matricula, siape, status FROM usuarios WHERE id = $1',
+      'SELECT id, name, email, role, matricula, siape, status FROM users WHERE id = $1',
       [req.user.id]
     );
     if (!result.rows[0])
@@ -98,10 +109,10 @@ router.get('/me', authMiddleware, async (req, res) => {
 router.put('/me', authMiddleware, async (req, res) => {
   const { name, email, matricula, currentPassword, newPassword } = req.body;
   try {
-    const userResult = await pool.query('SELECT * FROM usuarios WHERE id = $1', [req.user.id]);
+    // CORRIGIDO: Buscar da tabela 'users'
+    const userResult = await pool.query('SELECT * FROM users WHERE id = $1', [req.user.id]);
     const user = userResult.rows[0];
 
-    // Verificar senha atual
     if (currentPassword) {
       const valid = await bcrypt.compare(currentPassword, user.password);
       if (!valid)
@@ -113,8 +124,9 @@ router.put('/me', authMiddleware, async (req, res) => {
       hash = await bcrypt.hash(newPassword, 10);
     }
 
+    // CORRIGIDO: Atualizar a tabela 'users'
     const result = await pool.query(
-      `UPDATE usuarios
+      `UPDATE users
        SET name = COALESCE($1, name),
            email = COALESCE($2, email),
            matricula = COALESCE($3, matricula),

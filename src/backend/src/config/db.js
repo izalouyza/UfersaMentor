@@ -1,12 +1,13 @@
+require('dotenv').config();
 const { Pool } = require('pg');
-require('dotenv').config(); // Isso garante que o Node leia o seu .env
+
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  user: 'postgres',
+  host: 'localhost',
+  database: 'UfersaMentor', // ou o nome que deu ao seu banco
+  password: 'postgres',      // <--- COLOQUE A SENHA DIRETO AQUI (COM ASPAS)
+  port: 5432,
 });
 
 pool.on('connect', () => {
