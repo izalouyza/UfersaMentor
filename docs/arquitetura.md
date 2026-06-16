@@ -37,7 +37,20 @@ O projeto foi concebido como um **MVP (Minimum Viable Product)** no contexto da 
 A organização dos arquivos segue uma separação clara entre código-fonte e documentação técnica.
 
 ```text
+UfersaMentor/
+├── src/
+│   ├── frontend/            # Interface gráfica (React + TypeScript)
+│   │   ├── components/      # Componentes UI
+│   │   ├── pages/           # Dashboards e telas
+│   │   └── services/        # Integração com o Supabase
+│   │       └── supabase.ts  # Cliente Supabase inicializado
+│   │
+│   └── backend/             # [REESTRUTURAÇÃO]
+│       ├── supabase/        
 
+│
+├── docs/                    # Documentação técnica
+├── ...
 ```
 
 ---
