@@ -21,18 +21,18 @@ Este documento apresenta o **backlog do UfersaMentor**, reunindo as histórias d
 | ID        | História de Usuário / Funcionalidade                                                                    | Prioridade | Status |
 | --------- | ------------------------------------------------------------------------------------------------------- | ---------- | ------ |
 | **UC-01** | O usuário deve realizar autenticação por meio do login institucional (SIGAA/Supabase Auth).             | Crítica    | 🟡     |
-| **UC-02** | O administrador deve ativar a conta de um monitor por meio de convite e definição de senha.             | Alta       | 🔴     |
+| **UC-02** | O administrador deve definir o monitor para determinada monitoria           | Alta       | 🟢     |
 | **UC-03** | O usuário deve pesquisar monitorias por disciplina, monitor ou horário disponível.                      | Alta       | 🟢     |
 | **UC-04** | O aluno deve agendar uma sessão de monitoria em um horário disponível, respeitando o controle de vagas. | Crítica    | 🟢     |
-| **UC-05** | O aluno deve cancelar um agendamento dentro do prazo permitido, liberando automaticamente a vaga.       | Alta       | 🟡     |
+| **UC-05** | O aluno deve cancelar um agendamento dentro do prazo permitido, liberando automaticamente a vaga.       | Alta       | 🟢     |
 | **UC-06** | O monitor deve cadastrar, editar e gerenciar seus plantões de monitoria.                                | Alta       | 🟢     |
-| **UC-07** | O monitor deve registrar a presença ou ausência dos alunos após cada atendimento.                       | Crítica    | 🟡     |
+| **UC-07** | O monitor deve registrar a presença ou ausência dos alunos após cada atendimento.                       | Crítica    | 🟢     |
 | **UC-08** | O monitor deve cancelar um plantão previamente cadastrado, notificando os alunos afetados.              | Alta       | 🔴     |
-| **UC-09** | O sistema deve disponibilizar um chat interno para comunicação entre alunos e monitores.                | Alta       | 🟢     |
+| **UC-09** | O sistema deve disponibilizar um chat interno para comunicação entre alunos e monitores.                | Alta       | 🔴     |
 | **UC-10** | O aluno deve acessar e realizar o download de materiais de apoio disponibilizados no sistema.           | Média      | 🟢     |
-| **UC-11** | O monitor ou professor deve realizar upload de materiais utilizando o Supabase Storage.                 | Média      | 🟢     |
+| **UC-11** | O monitor ou professor deve realizar upload de materiais e relatórios.                 | Média      | 🟢     |
 | **UC-12** | O administrador deve cadastrar e gerenciar os vínculos de monitoria dos usuários.                       | Alta       | 🟢     |
-| **UC-13** | Professores e administradores devem visualizar dashboards com indicadores de desempenho e assiduidade.  | Média      | 🟢     |
+| **UC-13** | Professores e administradores devem visualizar dashboards com indicadores de desempenho e assiduidade.  | Média      | 🟡     |
 | **UC-14** | O sistema deve gerar automaticamente relatórios mensais e folhas de frequência em formato PDF.          | Alta       | 🔴     |
 
 ---
@@ -109,8 +109,8 @@ Entre os indicadores previstos estão:
 * 🟢 Agendamento de monitorias;
 * 🟢 Gestão de plantões;
 * 🟢 Cadastro administrativo de monitores;
-* 🟡 Autenticação institucional;
-* 🟡 Registro de frequência;
+* 🔴 Autenticação institucional;
+* 🟢 Registro de frequência;
 * 🟢 Cancelamento de agendamentos;
 * 🟢 Upload de materiais.
 
@@ -118,16 +118,16 @@ Entre os indicadores previstos estão:
 
 ## Release 2
 
-* 🟢 Ativação de contas de monitor;
+* 🟡 Ativação de contas de monitor;
 * 🟡 Cancelamento de plantões;
-* 🟢 Chat interno;
+* 🔴 Chat interno;
 * 🟢 Download de materiais.
 
 ---
 
 ## Release 3
 
-* 🟢 Dashboards analíticos;
+* 🟡 Dashboards analíticos;
 * 🔴 Relatórios mensais em PDF;
 * 🔴 Melhorias nas políticas de segurança e auditoria;
 * 🔴 Funcionalidades avançadas de gestão e acompanhamento acadêmico.
