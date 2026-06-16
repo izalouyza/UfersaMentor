@@ -4,121 +4,129 @@
 
 ## 1. Visão Geral
 
-O **UfersaMentor** é uma aplicação desenvolvida para centralizar e facilitar o gerenciamento das monitorias acadêmicas na **UFERSA**. O sistema permite o cadastro de monitores, acompanhamento de sessões e visualização de horários, substituindo controles manuais por uma plataforma organizada.
+O **UfersaMentor** é uma aplicação desenvolvida para centralizar e facilitar o gerenciamento das monitorias acadêmicas na UFERSA. O sistema permite o cadastro de monitores, acompanhamento de sessões e visualização de horários, substituindo controles manuais por uma plataforma organizada.
 
 O projeto foi concebido como um **MVP (Minimum Viable Product)** no contexto da disciplina de Engenharia de Software.
 
 ---
 
-# 2. Tecnologias Utilizadas
+## 2. Tecnologias Utilizadas
 
-## Frontend
-*   **TypeScript**: Utilizado como linguagem principal para garantir tipagem e segurança em todo o desenvolvimento.
-*   **CSS**: Responsável pela estilização e interface visual.
+### Frontend
 
-## Backend
+* **TypeScript:** utilizado como linguagem principal para garantir tipagem estática e maior segurança durante o desenvolvimento.
+* **Tailwind CSS:** responsável pela estilização da interface e construção de layouts modernos e responsivos.
 
+### Backend (BaaS)
 
-## Banco de Dados
+* **Supabase:** plataforma utilizada como **Backend as a Service (BaaS)**, responsável pela autenticação, gerenciamento do banco de dados e aplicação das políticas de segurança.
 
+### Banco de Dados
 
-## Ferramentas de Desenvolvimento
-*   **Git & GitHub**: Controle de versão e colaboração.
-*   **Engenharia de Software**: Aplicação de levantamento de requisitos, modelagem e prototipação.
+* **PostgreSQL:** sistema de gerenciamento de banco de dados relacional hospedado no Supabase.
+
+### Ferramentas de Desenvolvimento
+
+* **Git & GitHub:** utilizados para controle de versão e colaboração entre os integrantes da equipe.
+* **Engenharia de Software:** aplicação de técnicas de levantamento de requisitos, modelagem e prototipação do sistema.
 
 ---
 
-# 3. Estrutura do Projeto
+## 3. Estrutura do Projeto
 
-A organização dos arquivos segue uma separação clara entre código-fonte e documentação técnica [5]:
+A organização dos arquivos segue uma separação clara entre código-fonte e documentação técnica.
 
 ```text
-UfersaMentor/
-├── src/
-│   ├── frontend/        # Interface gráfica da aplicação
-│   └── backend/         # Regras de negócio e comunicação com o banco
-│
-├── docs/                # Documentação técnica complementar
-│   ├── arquitetura.md   # Detalhes da estrutura da aplicação
-│   ├── backlog.md       # Planejamento de funcionalidades
-│   └── diagramas.md     # Modelagem visual do sistema
-│
-├── .gitignore           # Arquivos ignorados pelo controle de versão
-└── README.md            # Guia geral de execução e apresentação
 
 ```
 
 ---
 
-# 4. Fluxo Básico da Aplicação
+## 4. Fluxo Básico da Aplicação
 
-Com base na estrutura do UfersaMentor e nas camadas de processamento identificadas, o fluxo da aplicação segue este modelo:
+Com a utilização do Supabase como Backend as a Service, o fluxo de comunicação da aplicação ocorre da seguinte forma:
 
 ```text
 Usuário (Aluno | Monitor | Professor)
-      │
-      ▼
-Frontend (Interface Gráfica do UfersaMentor)
-      │
-      ▼
-API / Backend (Controladores)
-      │
-      ▼
-Camada de Serviços (Lógica de Monitoria)
-      │
-      ▼
-Repositório (Acesso aos Dados)
-      │
-      ▼
-Banco de Dados (UfersaMentor Database)
-      │
-      ▼
-Resposta ao Backend
-      │
-      ▼
-Frontend (Atualização da Interface)
-      │
-      ▼
+              │
+              ▼
+Frontend (UfersaMentor - React)
+              │
+              ▼
+Supabase Client (SDK)
+              │
+              ▼
+Row Level Security (RLS)
+              │
+              ▼
+PostgreSQL (Banco de Dados Supabase)
+              │
+              ▼
+Resposta ao Frontend
+              │
+              ▼
 Usuário
 ```
 
-O usuário (aluno | monitor | professor) interage com a interface para realizar ações como o cadastro de monitores ou a visualização de horários. O frontend captura essas ações e as envia para o backend, que é o responsável por processar as regras de negócio acadêmicas e gerenciar a comunicação com o banco de dados.
-
-Após a consulta ou persistência das informações (como o registro de uma nova sessão de monitoria), o backend devolve uma resposta que o frontend utiliza para atualizar a tela, garantindo que o processo de gerenciamento seja centralizado e eficiente.
+O usuário interage com a interface da aplicação. As operações são enviadas ao Supabase através do SDK oficial, que aplica as políticas de segurança (Row Level Security) antes de acessar o banco de dados PostgreSQL. Após o processamento, a resposta é retornada ao frontend para atualização da interface.
 
 ---
 
-# 5. Responsabilidade dos Componentes
+## 5. Responsabilidade dos Componentes
 
-## Frontend
+### Frontend
 
-Responsável por toda a interface gráfica, garantindo que as funcionalidades de visualização de horários e autenticação sejam acessíveis ao usuário final.
+Responsável pela interface gráfica da aplicação e pela comunicação direta com o Supabase SDK, proporcionando autenticação, visualização e manipulação dos dados de forma intuitiva.
 
----
+### Supabase (Backend)
 
-## Backend
+Responsável pelo gerenciamento da autenticação, armazenamento dos dados, aplicação das políticas de segurança (RLS) e disponibilização das APIs utilizadas pelo sistema.
 
-Gerencia as regras de negócio e a persistência de dados. É o núcleo que controla o gerenciamento de monitores e a integridade das informações do sistema.
+### Banco de Dados PostgreSQL
 
----
-
-# 6. Arquitetura Adotada
-
-O projeto utiliza uma arquitetura em camadas (Frontend → Backend → Banco de Dados), promovendo baixo acoplamento. No contexto do UfersaMentor, essa separação garante que o frontend possa evoluir visualmente (melhorando o protótipo original) sem afetar as regras de negócio de gerenciamento de monitorias no backend.
-
-O uso de TypeScript em ambas as camadas (97.5% do código) assegura uma padronização técnica e maior segurança no fluxo de dados
-Essa separação permite que alterações na interface não impactem diretamente a lógica de negócio, tornando o sistema mais organizado e escalável.
+Responsável pela persistência das informações do sistema, garantindo integridade, consistência e confiabilidade dos dados armazenados.
 
 ---
 
-# 7. Escalabilidade
+## 6. Arquitetura Adotada
 
-A estrutura atual foi desenhada para suportar a evolução do MVP. O backlog do projeto já prevê a inclusão de novas funcionalidades por meio da criação de novos componentes e serviços, sem comprometer a base existente de gerenciamento de informações.
+O projeto utiliza uma arquitetura baseada em **Backend as a Service (BaaS)**.
 
-Essa abordagem favorece o desenvolvimento colaborativo e segue boas práticas de Engenharia de Software.
+Diferentemente da arquitetura tradicional de três camadas, que possui um servidor de aplicação próprio, o UfersaMentor utiliza o Supabase para fornecer os serviços de backend, reduzindo a complexidade do desenvolvimento e da manutenção da infraestrutura.
+
+### Vantagens
+
+* Redução da complexidade da aplicação.
+* Autenticação integrada.
+* APIs geradas automaticamente.
+* Escalabilidade simplificada.
+* Menor custo de manutenção.
+* Desenvolvimento mais ágil.
+
+### Segurança
+
+A segurança é garantida por meio de:
+
+* Tipagem estática com TypeScript;
+* Políticas de acesso implementadas através do **Row Level Security (RLS)**;
+* Controle de autenticação e autorização realizado pelo Supabase.
+
+Dessa forma, cada usuário acessa apenas as informações compatíveis com seu perfil (administrador, professor, monitor ou aluno).
 
 ---
 
-# 8. Considerações Finais
+## 7. Escalabilidade
 
-A arquitetura do UfersaMentor atende aos objetivos da disciplina de Engenharia de Software, estabelecendo uma base sólida para um sistema que centraliza informações acadêmicas. O foco na modularidade permite que a aplicação saia do estágio de MVP para uma solução completa de controle de monitorias para a UFERSA.
+A arquitetura foi projetada para permitir a evolução contínua do MVP.
+
+Novas funcionalidades poderão ser incorporadas por meio da criação de novas tabelas, funções e políticas de segurança no Supabase, sem necessidade de alterações significativas na estrutura existente.
+
+Essa abordagem favorece o desenvolvimento incremental e está alinhada às boas práticas de Engenharia de Software.
+
+---
+
+## 8. Considerações Finais
+
+A arquitetura do **UfersaMentor** atende aos objetivos propostos para a disciplina de Engenharia de Software, fornecendo uma base moderna, modular e escalável para o gerenciamento das monitorias acadêmicas.
+
+A utilização do Supabase como Backend as a Service simplifica o desenvolvimento da aplicação, mantendo elevados padrões de segurança e facilitando futuras expansões do sistema, permitindo sua evolução de um MVP para uma solução completa e robusta para a UFERSA.
